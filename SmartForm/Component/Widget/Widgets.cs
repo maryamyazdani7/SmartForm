@@ -60,8 +60,8 @@ namespace SmartForm
         public int Count { get; set; }
         public string Unit { get; set; } = "مورد";
         public string Title { get; set; }
-        public string Color { get; set; }
-        public string BackgroundColor { get; set; }
+        public string ColorClass { get; set; }
+        public string BackgroundColorClass { get; set; }
         public string Link { get; set; }
         public string OnClickFunction { get; set; }
     }
@@ -214,8 +214,8 @@ namespace SmartForm
                                         </div>
                                     </div>
                                 </div>
-                            <script src=""/Chart/Chart.js/Chart.js""></script>
-                            <script src=""/Chart/Chart.js/chartjs-plugin-datalabels.js""></script>";
+                            <script src=""/Resources/Chart.js/Chart.js""></script>
+                            <script src=""/Resources/Chart.js/chartjs-plugin-datalabels.js""></script>";
 
             htmlString += @"<script>
                                 const ctx = document.getElementById('" + ChartId + @"');
@@ -505,8 +505,8 @@ namespace SmartForm
             {
                 StatItemListValue.ForEach(Item =>
                 {
-                    statItemHtmlString += @$"<li><div class=""dashboard-stat-item""><div class=""dashboard-stat-color""></div><div class=""dashboard-stat-data-container"">
-                               <p class=""dashboard-stat-title"">{Item.Title}</p><span class=""dashboard-stat-unit-count"">{Item.Count}<span>{Item.Unit}</span></span><img src=""/Widgets/Images/next-arrow.svg"" alt=""arrow""></div></div></li>";
+                    statItemHtmlString += @$"<li><a class=""dashboard-stat-item"" {(!string.IsNullOrWhiteSpace(Item.OnClickFunction) ? $@"onclick = ""{Item.OnClickFunction}""" : $@"href = ""{Item.Link}""")}><div class=""{Item.ColorClass} {Item.BackgroundColorClass} dashboard-stat-color""></div><div class=""dashboard-stat-data-container"">
+                               <p class=""dashboard-stat-title"">{Item.Title}</p><span class=""dashboard-stat-unit-count"">{Item.Count}<span>{Item.Unit}</span></span><img src=""/Resources/Images/next-arrow.svg"" alt=""arrow""></div></a></li>";
                 }
                 );
 
@@ -517,7 +517,7 @@ namespace SmartForm
                                     <div class=""dashboard-item-header-container"">
                                     <p class=""dashboard-skeleton-line-holder dashboard-item-title"">{Title}</p> 
                                     <div class=""dashboard-header-action-buttons"">
-                                    <button onclick=""LodaDashboardStatListData($('#{ Id }'), '{DataSource.WebApi}')""><img src=""/Widgets/images/refresh.svg""></button>                                   
+                                    <button onclick=""LodaDashboardStatListData($('#{ Id }'), '{DataSource.WebApi}')""><img src=""/Resources/images/refresh.svg""></button>                                   
                                     </div></div>
                                     <ul class=""dashboard-skeleton-line-holder dashboard-stat-list"">
                                         {statItemHtmlString}
@@ -536,7 +536,7 @@ namespace SmartForm
                                           var result = " + (string.IsNullOrEmpty(StatItemListFieldName) ? "data " : "data." + StatItemListFieldName) + @";
                                           $.each(result, function(index, item) {
                                             var listItem = '<li><a class=""dashboard-stat-item"" ' + (item.OnClickFunction != null || item.OnClickFunction != '' ? ""onclick = "" + item.OnClickFunction  : ""href = '"" + item.Link) + '><div class=""'+ item.Color +' '+ item.BackgroundColor +' dashboard-stat-color""></div><div class=""dashboard-stat-data-container"">' +
-                                                           '<p class=""dashboard-stat-title"">' + item.Title + '</p><span class=""dashboard-stat-unit-count"">' + item.Count + '<span>' + item.Unit + '</span></span><img src=""/Widgets/Images/next-arrow.svg"" alt=""arrow""></div></a></li>';
+                                                           '<p class=""dashboard-stat-title"">' + item.Title + '</p><span class=""dashboard-stat-unit-count"">' + item.Count + '<span>' + item.Unit + '</span></span><img src=""/Resources/Images/next-arrow.svg"" alt=""arrow""></div></a></li>';
                                             $widget.find('.dashboard-stat-list').append(listItem);
                                            });
                                           SkeletonHide($widget);
@@ -596,10 +596,9 @@ namespace SmartForm
                                     <div class=""dashboard-news-item-container"">
                                     <img class=""dashboard-news-item-img"" src=""{Item.Image}"">
                                     <div>
-                                    <p class=""dashboard-news-item-title"">{Item.Title}</p><span class=""dashboard-news-item-date-time-container""><span><img class=""dashboard-icon"" src=""/Widgets/Images/time-icon.svg""></span><span>{Item.Date}</span></span>
+                                    <p class=""dashboard-news-item-title"">{Item.Title}</p><span class=""dashboard-news-item-date-time-container""><span><img class=""dashboard-icon"" src=""/Resources/Images/time-icon.svg""></span><span>{Item.Date}</span></span>
                                     <p class=""dashboard-news-item-content"">{Item.Content}</p>
                                     <a href=""{Item.Link}"" target=""_blank"">{Item.LinkTitle}</a>
-                                    </div>
                                     </div>
                                     </div>
                                 </div>";
@@ -612,11 +611,13 @@ namespace SmartForm
                                 <div class=""dashboard-item-container"">
                                    <div class=""dashboard-skeleton-line-holder dashboard-item-header-container""><p class=""dashboard-skeleton-line-holder dashboard-item-title"">{Title}</p>
                                     <div class=""dashboard-header-action-buttons"">
-                                    <button onclick=""$('#{Id}').find('.owl-carousel').trigger('prev.owl.carousel');""><img src=""/Widgets/images/prev-arrow.svg""></button>
-                                    <button onclick=""$('#{Id}').find('.owl-carousel').trigger('next.owl.carousel');""><img src=""/Widgets/images/next-arrow.svg""></button>
+                                    <button onclick=""$('#{Id}').find('.owl-carousel').trigger('prev.owl.carousel');""><img src=""/Resources/images/prev-arrow.svg""></button>
+                                    <button onclick=""$('#{Id}').find('.owl-carousel').trigger('next.owl.carousel');""><img src=""/Resources/images/next-arrow.svg""></button>
                                     </div></div> 
                                     <div class=""dashboard-skeleton-line-holder owl-carousel owl-theme"">{slidesItem}</div></div></div>";
-            ScriptString += @"<link rel=""stylesheet"" href=""/Widgets/owl.carousel.min.css""><link rel=""stylesheet"" href=""/Widgets/owl.theme.default.min.css""><script src=""/Widgets/owl.carousel.min.js""></script>";
+            ScriptString += @"<link rel=""stylesheet"" href=""/Resources/owlcarousel/owl.carousel.min.css""><link rel=""stylesheet"" href=""/Resources/owlcarousel/owl.theme.default.min.css""><script src=""/Resources/owlcarousel/owl.carousel.min.js""></script>";
+            if (!string.IsNullOrEmpty(DataSource.WebApi))
+            {
             ScriptString += @"<script>
                                 $(document).ready(function(){
                                  function LodaDashboardSlidesListData($widget){
@@ -630,8 +631,8 @@ namespace SmartForm
                                                       $.each(result, function(index, item) {
                                                         var listItem = '<div class=""item dashboard-owl-carousel-item-container""><div class=""dashboard-news-item-container"">'+
                                                                         '<img class=""dashboard-news-item-img"" src=""'+ item.Image +'"">' + 
-                                                                        '<div><p class=""dashboard-news-item-title"">'+ item.Title +'</p><span class=""dashboard-news-item-date-time-container""><span><img class=""dashboard-icon"" src=""/Widgets/Images/time-icon.svg""></span><span>'+ item.Date +'</span></span>'+
-                                                                        '<p class=""dashboard-news-item-content"">'+ item.Content +'</p><a href=""'+ item.Link +'"" target=""_blank"">'+ item.LinkTitle +'</a></div></div></div></div > ';
+                                                                        '<div><p class=""dashboard-news-item-title"">'+ item.Title +'</p><span class=""dashboard-news-item-date-time-container""><span><img class=""dashboard-icon"" src=""/Resources/Images/time-icon.svg""></span><span>'+ item.Date +'</span></span>'+
+                                                                        '<p class=""dashboard-news-item-content"">'+ item.Content +'</p><a href=""'+ item.Link +'"" target=""_blank"">'+ item.LinkTitle +'</a></div></div></div>';
                                                         $widget.find('.owl-carousel').append(listItem);
                                                        });
                                                       SkeletonHide($widget);
@@ -659,6 +660,25 @@ namespace SmartForm
                                 });
                             });
                             </script>";
+
+            }
+            else
+            {
+                ScriptString += @"<script>
+                                $(document).ready(function(){   
+                                    $('#" + Id + @"').find('.owl-carousel').owlCarousel({
+                                        rtl:true,
+                                        nav:false,
+                                        dots:true,
+                                        items:1,
+                                        loop:true,
+                                        autoplay:true,
+                                        autoplayTimeout:5000,
+                                        autoplayHoverPause:true
+                                        });
+                            });
+                            </script>";
+            }
             return  htmlString + ScriptString;
         }
     }

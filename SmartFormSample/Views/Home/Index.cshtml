@@ -1,0 +1,46 @@
+﻿@using SmartForm
+@using static SmartForm.Slider
+@Html.SmartForm().Dashboard(10, 8).AddWidgets(new List<Widget>{
+        new Notice("Alert")
+            {
+                Title = "توقف خدمات ",
+                RowCount = 1,
+                ColumnCount = 8
+            }
+            .Label("اطلاعیه")
+    .Content("مشتری گرامی، به علت عدم تسویه مانده بدهی، انجام کلیه خدمات متوقف گردید.")
+    .LinkTitle("مشاهده اطلاعیه"),
+        new Chart("TicketChart"){
+        Title = "وضعیت تیکت‌های باز",
+        ChartId = "123",
+        ChartDataList = new List<ChartData>{
+        new ChartData{Label = "منتظر بررسی 10)", Data = 16, Color = "#D06D12"},
+        new ChartData{Label = "در حال انجام(10)", Data = 16, Color = "#0BA562"},
+        new ChartData{Label = "منتظر پاسخ(14)", Data = 18, Color = "#F4CC3B"},
+        new ChartData{Label = " تایید(40)", Data = 50, Color = "#343CF9"}
+        },
+        RowCount = 2,
+        ColumnCount = 4
+        },
+        new DataStat("LastAgreement"){
+        Title = "تاریخ آخرین قرارداد",
+        RowCount = 1,
+        ColumnCount = 2
+        }.SetInfo(x => x.ValueField = "5 روز تا پایان قرارداد" ).Data("1400/10/20"),
+        new DataStat("Score"){
+        Title = "مدت زمان تا پایان قرارداد",
+        RowCount = 1,
+        ColumnCount = 2
+        }.Data("5").Unit("روز"),
+        new StatList("ticket stat"){
+        Title = "وضعیت تیکت‌ها",
+        RowCount = 1,
+        ColumnCount = 4
+        }.StatItemList(new List<StatListData>{new StatListData{Title = "منتظر بررسی", Count= 10, BackgroundColorClass = "pending-background-color", Link="https://www.google.com"},new StatListData{Title = "منتظر پاسخ", Count= 10}}),
+        new Slider("carousel stat"){
+        Title = "اعلان",
+        RowCount = 2,
+        ColumnCount = 4
+        }.SlidesList(new List<SliderItem>{new SliderItem{Image="/images/city.jpg", Title = "test1", Date="1402/01/06", Content="test1 content"},
+        new SliderItem{Image="/images/city.jpg", Title = "test2", Date="1402/01/06", Content="test2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 contenttest2 content"}})
+        }).Build()

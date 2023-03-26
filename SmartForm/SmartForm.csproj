@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Widgets\Images\arrow.svg" />
+    <None Remove="Resources\css\dashboard.css" />
+    <None Remove="Resources\Images\arrow.svg" />
     <None Remove="Resources\owlcarousel\owl.carousel.css" />
     <None Remove="Resources\owlcarousel\owl.carousel.js" />
     <None Remove="Resources\owlcarousel\owl.carousel.min.css" />
@@ -15,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Widgets\Images\arrow.svg">
+    <Content Include="Resources\Images\arrow.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\owlcarousel\owl.carousel.css">
@@ -33,11 +34,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\css\dashboard.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Resources\Chart.js\" />
+    <Folder Include="Resources\Widgets\" />
   </ItemGroup>
 
 </Project>
